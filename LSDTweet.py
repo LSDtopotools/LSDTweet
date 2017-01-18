@@ -16,6 +16,7 @@ import tweepy
 import random
 import git
 import sys
+import datetime
 import os.path as op
 from secrets import *
 
@@ -49,6 +50,14 @@ def make_a_tweet(Hash, Message):
     Generate a valid tweet using the info passed in.
     """
     return Hash + ': ' + Message
+
+
+def ConvertHashToDate(Hash):
+    """
+    Converts a unix datestamp given in hexadecimal to
+    a formatted date dd/mm/YYYY
+    """
+    return datetime.datetime.utcfromtimestamp(int(Hash,16)).strftime('%d/%m/%Y')
 
 
 def Tweet(Tweet, Hash=''):
