@@ -56,11 +56,11 @@ def Tweet(Tweet, Hash=''):
     Tweet the commit message and wrie the revision number to a file.
     """
     # Twitter authentication
-    #auth = tweepy.OAuthHandler(C_KEY, C_SECRET)
-    #auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)
-    #api = tweepy.API(auth)
+    auth = tweepy.OAuthHandler(C_KEY, C_SECRET)
+    auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)
+    api = tweepy.API(auth)
 
-    #api.update_status(Tweet)
+    api.update_status(Tweet)
 
     print(Tweet)
 
