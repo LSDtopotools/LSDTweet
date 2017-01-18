@@ -13,8 +13,10 @@ crontab.
 SWDG 18/1/17
 """
 import tweepy
+import random
 import git
 import sys
+import os.path as op
 from secrets import *
 
 
@@ -30,14 +32,14 @@ def ScrapeGIT(repoURL):
     return Hash, Message
 
 
-def check_length_for_tweet(Hash, Message):
+def reduce_length_for_tweet(Hash, Message):
     """
     Recursively remove a word from the message until it is small enough to tweet
     """
     if len(Hash) + len(Message) > 140:
         # get rid of a word
         message = ' '.join(Message.split(' ')[:-1])
-        return check_length_for_tweet(Hash, Message)
+        return reduce_length_for_tweet(Hash, Message)
 
     return Hash, Message
 
@@ -49,24 +51,91 @@ def make_a_tweet(Hash, Message):
     return Hash + ': ' + Message
 
 
-def Tweet(Tweet, revision):
+def Tweet(Tweet, Hash=''):
     """
     Tweet the commit message and wrie the revision number to a file.
     """
     # Twitter authentication
-    auth = tweepy.OAuthHandler(C_KEY, C_SECRET)
-    auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)
-    api = tweepy.API(auth)
+    #auth = tweepy.OAuthHandler(C_KEY, C_SECRET)
+    #auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)
+    #api = tweepy.API(auth)
 
-    api.update_status(Tweet)
+    #api.update_status(Tweet)
 
-    # store the hash in a file
-    with open('.hash', 'w') as f:
-        f.write(revision)
+    print(Tweet)
+
+    if Hash:
+        # store the hash in a file
+        with open('.hash', 'w') as f:
+            f.write(Hash)
+
+
+def GetRecentTweets():
+    """
+    Load the most recent tweets from a file.
+    """
+    if op.isfile('.recent'):
+        with open('.recent', 'r') as f:
+            return f.readlines()
+    else:
+        return ['']
 
 
 def OtherTweets():
-    pass
+    '''
+    Load a random tweet from the file, check its length and if it has been
+    recently tweeted .
+    '''
+    with open('Tweets.txt', 'r') as f:
+        Tweets = f.readlines()
+
+    Recent = GetRecentTweets()
+
+    # cycle through random tweets until one meets the criteria.
+    while True:
+        text = random.choice(Tweets)
+
+        if (text not in Recent) and CheckLength(text):
+            break
+
+    return text
+
+
+def CheckLength(tweet):
+    """
+    Check the prospective tweet is not too long.
+    """
+    if len(tweet) > 139:
+        return False
+    else:
+        return True
+
+
+def WriteRecent(tweet):
+    """
+    Write the most recent tweet to a file, keeping the 5 most recent tweets.
+    Adds tweet to front of file and pops the oldest recent tweet off the file.
+    """
+
+    if op.isfile('.recent'):
+        recent = GetRecentTweets()
+    else:
+        recent = []
+
+    # if the list is longer than 4, remove the last entry and add the tweet
+    # otherwise just add the tweet to the list
+    # THIS VALUE MUST BE LESS THAN THE NUMBER OF TWEETS IN THE FILE TO AVOID
+    # AN INFINITE LOOP
+    if len(recent) >= 2:
+        recent = [''] + recent[:-1]
+        recent[0] = tweet
+    else:
+        recent = [''] + recent[:]
+        recent[0] = tweet
+
+    with open('.recent', 'w') as f:
+        for r in recent:
+            f.write(r)
 
 
 def CheckForNewCommit(Revision):
@@ -74,7 +143,6 @@ def CheckForNewCommit(Revision):
     Avoid repeating the same tweet by comparing revision numbers.
     Returns True if values are different.
     """
-    import os.path as op
     if op.isfile('.hash'):
         with open('.hash', 'r') as f:
             CurrentRev = f.readline()
@@ -90,14 +158,16 @@ def Run(repoPath):
     Wrapper to run all of the steps to send out a tweet.
     """
     Hash, Message = ScrapeGIT(repoPath)
-    Hash, Message = check_length_for_tweet(Hash, Message)
+    Hash, Message = reduce_length_for_tweet(Hash, Message)
 
     if CheckForNewCommit(Hash):
         FinalTweet = make_a_tweet(Hash, Message)
         Tweet(FinalTweet, Hash)
     else:
         # tweet something else?
-        pass
+        tweet = OtherTweets()
+        Tweet(tweet)
+        WriteRecent(tweet)
 
 
 if __name__ == "__main__":
