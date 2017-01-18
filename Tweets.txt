@@ -1,0 +1,4 @@
+Follow the LSDTopoTools developers: @SimonMariusMudd @MartinDHurst @GIStuart @dvalts @FionaClubb25 @DMilodowski
+To learn more about this project visit: https://lsdtopotools.github.io
+Want to get the code? https://github.com/lsdtopotools
+Need help getting started? Check out the user guide: https://lsdtopotools.github.io/LSDTT_book/
