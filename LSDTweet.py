@@ -33,23 +33,29 @@ def ScrapeGIT(repoURL):
     return Hash, Message
 
 
-def reduce_length_for_tweet(Hash, Message):
+def reduce_length_for_tweet(Hash, Message, Reduced=False):
     """
     Recursively remove a word from the message until it is small enough to tweet
+    Reduced is a boolean testing if the string has been shortened. If it
+    has, an ellipsis (…) will be placed at the end of the tweet.
     """
-    if len(Hash) + len(Message) > 135:
+    if len(Hash) + len(Message) > 35:
         # get rid of a word
         Message = ' '.join(Message.split(' ')[:-1])
-        return reduce_length_for_tweet(Hash, Message)
+        Reduced = True
+        return reduce_length_for_tweet(Hash, Message, Reduced)
 
-    return Hash, Message
+    return Hash, Message, Reduced
 
 
-def make_a_tweet(Hash, Message):
+def make_a_tweet(Hash, Message, Reduced):
     """
     Generate a valid tweet using the info passed in.
     """
-    return Hash + ': ' + Message
+    tweet = Hash + ': ' + Message
+    if Reduced:
+        tweet += '…'
+    return tweet
 
 
 def ConvertHashToDate(Hash):
@@ -70,6 +76,7 @@ def Tweet(Tweet, Hash=''):
     api = tweepy.API(auth)
     api.update_status(Tweet)
 
+    print (Tweet)
     if Hash:
         # store the hash in a file
         with open('.hash', 'w') as f:
@@ -164,10 +171,10 @@ def Run(repoPath):
     Wrapper to run all of the steps to send out a tweet.
     """
     Hash, Message = ScrapeGIT(repoPath)
-    Hash, Message = reduce_length_for_tweet(Hash, Message)
+    Hash, Message, Reduced = reduce_length_for_tweet(Hash, Message)
 
     if CheckForNewCommit(Hash):
-        FinalTweet = make_a_tweet(Hash, Message)
+        FinalTweet = make_a_tweet(Hash, Message, Reduced)
         Tweet(FinalTweet, Hash)
     else:
         # tweet something else?
