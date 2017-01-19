@@ -16,9 +16,9 @@ import tweepy
 import random
 import git
 import sys
-import datetime
 import os.path as op
 from secrets import *
+from datetime import datetime
 
 
 def ScrapeGIT(repoURL):
@@ -57,7 +57,7 @@ def ConvertHashToDate(Hash):
     Converts a unix datestamp given in hexadecimal to
     a formatted date dd/mm/YYYY
     """
-    return datetime.datetime.utcfromtimestamp(int(Hash,16)).strftime('%d/%m/%Y')
+    return datetime.utcfromtimestamp(int(Hash, 16)).strftime('%d/%m/%Y')
 
 
 def Tweet(Tweet, Hash=''):
