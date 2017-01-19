@@ -126,7 +126,7 @@ def CheckLength(tweet):
 
 def WriteRecent(tweet):
     """
-    Write the most recent tweet to a file, keeping the 5 most recent tweets.
+    Write the most recent tweet to a file, keeping the n most recent tweets.
     Adds tweet to front of file and pops the oldest recent tweet off the file.
     """
 
