@@ -25,7 +25,7 @@ def ScrapeGIT(repoURL):
     """
     Given a path to a local git repo, return the commit message and hash.
     """
-    g = git.cmd.Git('/home/sgrieve/LSDDev/')
+    g = git.cmd.Git(repoURL)
     g.pull()
     Message = (g.log('-1', '--pretty=format:%s'))
     Hash = (g.log('-1', '--pretty=format:%h'))
