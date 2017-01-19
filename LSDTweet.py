@@ -37,9 +37,9 @@ def reduce_length_for_tweet(Hash, Message):
     """
     Recursively remove a word from the message until it is small enough to tweet
     """
-    if len(Hash) + len(Message) > 140:
+    if len(Hash) + len(Message) > 135:
         # get rid of a word
-        message = ' '.join(Message.split(' ')[:-1])
+        Message = ' '.join(Message.split(' ')[:-1])
         return reduce_length_for_tweet(Hash, Message)
 
     return Hash, Message
@@ -68,10 +68,7 @@ def Tweet(Tweet, Hash=''):
     auth = tweepy.OAuthHandler(C_KEY, C_SECRET)
     auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)
     api = tweepy.API(auth)
-
     api.update_status(Tweet)
-
-    print(Tweet)
 
     if Hash:
         # store the hash in a file
