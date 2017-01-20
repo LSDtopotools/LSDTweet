@@ -39,7 +39,7 @@ def reduce_length_for_tweet(Hash, Message, Reduced=False):
     Reduced is a boolean testing if the string has been shortened. If it
     has, an ellipsis (…) will be placed at the end of the tweet.
     """
-    if len(Hash) + len(Message) > 35:
+    if len(Hash) + len(Message) > 133:
         # get rid of a word
         Message = ' '.join(Message.split(' ')[:-1])
         Reduced = True
