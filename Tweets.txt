@@ -2,3 +2,18 @@ Follow the LSDTopoTools developers: @SimonMariusMudd @MartinDHurst @GIStuart @dv
 To learn more about this project visit: https://lsdtopotools.github.io
 Want to get the code? https://github.com/lsdtopotools
 Need help getting started? Check out the user guide: https://lsdtopotools.github.io/LSDTT_book/
+An LSDTT paper: The relationship between drainage density, erosion rate, and hilltop curvature: implications for sediment…|doi.org/f3tx7c
+An LSDTT paper: How does grid-resolution modulate the topographic expression of geomorphic processes?|doi.org/bxk4
+An LSDTT paper: Global analysis of the stream power law parameters based on worldwide 10Be denudation rates|doi.org/f3tx7d
+An LSDTT paper: Detection of transience in eroding landscapes|doi.org/f3tx7f
+An LSDTT paper: A nondimensional framework for exploring the relief structure of landscapes|doi.org/f3tx7g
+An LSDTT paper: Prediction of flash-flood hazard impact from Himalayan river profiles|doi.org/f3tx7h
+An LSDTT paper: Erosion rates as a potential bottom-up control of forest structural characteristics in the Sierra Nevada…|doi.org/f3tx3c
+An LSDTT paper: Hillslopes Record the Growth and Decay of Landscapes|doi.org/f3tx7j
+An LSDTT paper: Influence of lithology on hillslope morphology and response to tectonic forcing in the northern Sierra…|doi.org/f3tx7k
+An LSDTT paper: Using hilltop curvature to derive the spatial distribution of erosion rates|doi.org/f3tx7m
+An LSDTT paper: The CAIRN method: automated, reproducible calculation of catchment-averaged denudation rates from…|doi.org/f3tx29
+An LSDTT paper: How long is a hillslope?|doi.org/bxk5
+An LSDTT paper: Topographic roughness as a signature of the emergence of bedrock in eroding landscapes|doi.org/f3tx7n
+An LSDTT paper: A statistical framework to quantify spatial variation in channel gradients using the integral method of…|doi.org/f3tx7p
+An LSDTT paper: Objective extraction of channel heads from high-resolution topographic data|doi.org/f3tx7q

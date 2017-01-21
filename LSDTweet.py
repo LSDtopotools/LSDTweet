@@ -71,10 +71,10 @@ def Tweet(Tweet, Hash=''):
     Tweet the commit message and wrie the revision number to a file.
     """
     # Twitter authentication
-    auth = tweepy.OAuthHandler(C_KEY, C_SECRET)
-    auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)
-    api = tweepy.API(auth)
-    api.update_status(Tweet)
+    #auth = tweepy.OAuthHandler(C_KEY, C_SECRET)
+    #auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)
+    #api = tweepy.API(auth)
+    #api.update_status(Tweet)
 
     print (Tweet)
     if Hash:
@@ -97,7 +97,7 @@ def GetRecentTweets():
 def OtherTweets():
     '''
     Load a random tweet from the file, check its length and if it has been
-    recently tweeted .
+    recently tweeted.
     '''
     with open('Tweets.txt', 'r') as f:
         Tweets = f.readlines()
@@ -151,9 +151,9 @@ def WriteRecent(tweet):
             f.write(r)
 
 
-def CheckForNewCommit(Revision):
+def CheckForNewCommit(Hash):
     """
-    Avoid repeating the same tweet by comparing revision numbers.
+    Avoid repeating the same tweet by comparing hashes.
     Returns True if values are different.
     """
     if op.isfile('.hash'):
@@ -162,8 +162,9 @@ def CheckForNewCommit(Revision):
     else:
         # if the file is not present assume commit is new,
         # set value to zero so function returns True
-        CurrentRev = 0
-    return CurrentRev != Revision
+        CurrentRev = '0'
+
+    return CurrentRev != Hash
 
 
 def Run(repoPath):
