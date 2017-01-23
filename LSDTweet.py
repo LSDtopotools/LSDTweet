@@ -16,6 +16,7 @@ import tweepy
 import random
 import git
 import sys
+import os
 import os.path as op
 from secrets import *
 from datetime import datetime
@@ -79,7 +80,8 @@ def Tweet(Tweet, Hash=''):
     print (Tweet)
     if Hash:
         # store the hash in a file
-        with open('.hash', 'w') as f:
+        path = op.realpath(op.join(os.getcwd(), op.dirname(__file__)))
+        with open(op.join(path, '.hash'), 'w') as f:
             f.write(Hash)
 
 
@@ -87,8 +89,10 @@ def GetRecentTweets():
     """
     Load the most recent tweets from a file.
     """
-    if op.isfile('.recent'):
-        with open('.recent', 'r') as f:
+    path = op.realpath(op.join(os.getcwd(), op.dirname(__file__)))
+    recentFile = op.join(path, '.recent')
+    if op.isfile(recentFile):
+        with open(recentFile, 'r') as f:
             return f.readlines()
     else:
         return ['']
@@ -99,7 +103,8 @@ def OtherTweets():
     Load a random tweet from the file, check its length and if it has been
     recently tweeted.
     '''
-    with open('Tweets.txt', 'r') as f:
+    path = op.realpath(op.join(os.getcwd(), op.dirname(__file__)))
+    with open(op.join(path, 'Tweets.txt'), 'r') as f:
         Tweets = f.readlines()
 
     Recent = GetRecentTweets()
@@ -129,24 +134,25 @@ def WriteRecent(tweet):
     Write the most recent tweet to a file, keeping the n most recent tweets.
     Adds tweet to front of file and pops the oldest recent tweet off the file.
     """
-
-    if op.isfile('.recent'):
+    path = op.realpath(op.join(os.getcwd(), op.dirname(__file__)))
+    recentFile = op.join(path, '.recent')
+    if op.isfile(recentFile):
         recent = GetRecentTweets()
     else:
         recent = []
 
-    # if the list is longer than 4, remove the last entry and add the tweet
+    # if the list is longer than 15, remove the last entry and add the tweet
     # otherwise just add the tweet to the list
     # THIS VALUE MUST BE LESS THAN THE NUMBER OF TWEETS IN THE FILE TO AVOID
     # AN INFINITE LOOP
-    if len(recent) >= 2:
+    if len(recent) >= 15:
         recent = [''] + recent[:-1]
         recent[0] = tweet
     else:
         recent = [''] + recent[:]
         recent[0] = tweet
 
-    with open('.recent', 'w') as f:
+    with open(recentFile, 'w') as f:
         for r in recent:
             f.write(r)
 
@@ -156,8 +162,10 @@ def CheckForNewCommit(Hash):
     Avoid repeating the same tweet by comparing hashes.
     Returns True if values are different.
     """
-    if op.isfile('.hash'):
-        with open('.hash', 'r') as f:
+    path = op.realpath(op.join(os.getcwd(), op.dirname(__file__)))
+    hashFile = op.join(path, '.hash')
+    if op.isfile(hashFile):
+        with open(hashFile, 'r') as f:
             CurrentRev = f.readline()
     else:
         # if the file is not present assume commit is new,
