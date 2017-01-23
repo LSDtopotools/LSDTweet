@@ -145,7 +145,7 @@ def WriteRecent(tweet):
     # otherwise just add the tweet to the list
     # THIS VALUE MUST BE LESS THAN THE NUMBER OF TWEETS IN THE FILE TO AVOID
     # AN INFINITE LOOP
-    if len(recent) >= 15:
+    if len(recent) > 14:
         recent = [''] + recent[:-1]
         recent[0] = tweet
     else:
