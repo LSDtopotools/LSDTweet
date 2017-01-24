@@ -17,3 +17,5 @@ An LSDTT paper: How long is a hillslope?|doi.org/bxk5
 An LSDTT paper: Topographic roughness as a signature of the emergence of bedrock in eroding landscapes|doi.org/f3tx7n
 An LSDTT paper: A statistical framework to quantify spatial variation in channel gradients using the integral method…|doi.org/f3tx7p
 An LSDTT paper: Objective extraction of channel heads from high-resolution topographic data|doi.org/f3tx7q
+An LSDTT paper: Subsidence control on river morphology and grain size in the Ganga Plain|doi.org/f3tzfq
+An LSDTT paper: Squeezing river catchments through tectonics: Shortening and erosion across the Indus Valley, NW…|doi.org/f3tzfr
