@@ -7,7 +7,7 @@ Want to calculate erosion rates from 10Be? https://github.com/LSDtopotools/LSDTo
 Want to analyse river profiles? https://github.com/LSDtopotools/LSDTopoTools_ChiMudd2014
 Want to find floodplains or terraces from topographic data? https://github.com/LSDtopotools/LSDTopoTools_FloodplainTerraceExtraction 
 Want to find out how long your hillslopes are? https://github.com/LSDtopotools/LSDTT_Hillslope_Analysis 
-Does your life lack meaning? Try picking a Scottish football team to support! http://www.bbc.co.uk/sport/football/scottish
+Does your life lack meaning? Try picking a Scottish football team to support! http://www.bbc.co.uk/sport/football/teams/hibernian
 Need help getting started? Check out the user guide: https://lsdtopotools.github.io/LSDTT_book/
 An LSDTT paper: The relationship between drainage density, erosion rate, and hilltop curvature: implications for…|doi.org/f3tx7c
 An LSDTT paper: How does grid-resolution modulate the topographic expression of geomorphic processes?|doi.org/bxk4
